@@ -5,7 +5,7 @@ export const getProducts = async () => {
   if (!res.ok) {
     throw new Error("Faild to fetch products");
   }
-  return res.json();
+  return productData
 };
 export const getTrendingProducts = async () => {
   const res = await fetch(
@@ -14,7 +14,7 @@ export const getTrendingProducts = async () => {
   if (!res.ok) {
     throw new Error("Faild to fetch products");
   }
-  return res.json();
+  return productData
 };
 
 export const calculatePercentage = (oldPrice: any, price: any) => {

@@ -19,7 +19,7 @@ const config: Config = {
         bodyFont: ["Uarbanist", ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        bodyColor: "#fbfaf7",
+        bodyColor: "#1C1C1C",
         bgLight: "#1010100d",
         darkText: "#242424",
         lightText: "#a5a5a5",
