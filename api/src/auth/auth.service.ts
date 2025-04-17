@@ -11,12 +11,12 @@ export class AuthService {
   @Inject()
   private readonly jtwService: JwtService;
   
-  async signin(Params: Prisma.UserCreateInput):Promise<{access_token:string,role:string}> {
+  async signin(Params: Prisma.UserCreateInput):Promise<{access_token:string}> {
     const user = await this.prisma.user.findFirst({where:{email:Params.email}})
     if(!user) throw new NotFoundException('usuario não encontrado')
       const passwordMatch = await bcrypt.compare(Params.password, user.password)
     if(!passwordMatch) throw new UnauthorizedException('credenciais invalidas')
-      const payload = {sub: user.id, roles: user.role}
-    return {access_token: await this.jtwService.signAsync(payload), role: user.role}
+      const payload = {sub: user.id, email: user.email,name:user.name ,roles: user.role}
+    return {access_token: await this.jtwService.signAsync(payload)}
   }
 }
