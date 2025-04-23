@@ -128,6 +128,35 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.ProductScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  quantity: 'quantity',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EstoqueScalarFieldEnum = {
+  id: 'id',
+  quantidade: 'quantidade',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  produtoId: 'produtoId',
+  vendaId: 'vendaId'
+};
+
+exports.Prisma.VendaScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  status: 'status',
+  valor: 'valor',
+  modalidade: 'modalidade',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -144,13 +173,38 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   name: 'name',
   img: 'img'
 };
+
+exports.Prisma.ProductOrderByRelevanceFieldEnum = {
+  name: 'name'
+};
+
+exports.Prisma.VendaOrderByRelevanceFieldEnum = {
+  description: 'description'
+};
 exports.Role = exports.$Enums.Role = {
   ADMIN: 'ADMIN',
   CLIENTE: 'CLIENTE'
 };
 
+exports.Status = exports.$Enums.Status = {
+  PENDENTE: 'PENDENTE',
+  CONFIRMED: 'CONFIRMED',
+  CANCELED: 'CANCELED'
+};
+
+exports.Modality = exports.$Enums.Modality = {
+  DINHEIRO: 'DINHEIRO',
+  DEBITO: 'DEBITO',
+  CREDITO: 'CREDITO',
+  PARCELADO: 'PARCELADO',
+  PIX: 'PIX'
+};
+
 exports.Prisma.ModelName = {
-  User: 'User'
+  User: 'User',
+  Product: 'Product',
+  Estoque: 'Estoque',
+  Venda: 'Venda'
 };
 
 /**

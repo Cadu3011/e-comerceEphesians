@@ -18,6 +18,21 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
+/**
+ * Model Product
+ * 
+ */
+export type Product = $Result.DefaultSelection<Prisma.$ProductPayload>
+/**
+ * Model Estoque
+ * 
+ */
+export type Estoque = $Result.DefaultSelection<Prisma.$EstoquePayload>
+/**
+ * Model Venda
+ * 
+ */
+export type Venda = $Result.DefaultSelection<Prisma.$VendaPayload>
 
 /**
  * Enums
@@ -30,11 +45,39 @@ export namespace $Enums {
 
 export type Role = (typeof Role)[keyof typeof Role]
 
+
+export const Status: {
+  PENDENTE: 'PENDENTE',
+  CONFIRMED: 'CONFIRMED',
+  CANCELED: 'CANCELED'
+};
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+
+export const Modality: {
+  DINHEIRO: 'DINHEIRO',
+  DEBITO: 'DEBITO',
+  CREDITO: 'CREDITO',
+  PARCELADO: 'PARCELADO',
+  PIX: 'PIX'
+};
+
+export type Modality = (typeof Modality)[keyof typeof Modality]
+
 }
 
 export type Role = $Enums.Role
 
 export const Role: typeof $Enums.Role
+
+export type Status = $Enums.Status
+
+export const Status: typeof $Enums.Status
+
+export type Modality = $Enums.Modality
+
+export const Modality: typeof $Enums.Modality
 
 /**
  * ##  Prisma Client ʲˢ
@@ -170,6 +213,36 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.product`: Exposes CRUD operations for the **Product** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Products
+    * const products = await prisma.product.findMany()
+    * ```
+    */
+  get product(): Prisma.ProductDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.estoque`: Exposes CRUD operations for the **Estoque** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Estoques
+    * const estoques = await prisma.estoque.findMany()
+    * ```
+    */
+  get estoque(): Prisma.EstoqueDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.venda`: Exposes CRUD operations for the **Venda** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Vendas
+    * const vendas = await prisma.venda.findMany()
+    * ```
+    */
+  get venda(): Prisma.VendaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -610,7 +683,10 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    User: 'User'
+    User: 'User',
+    Product: 'Product',
+    Estoque: 'Estoque',
+    Venda: 'Venda'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -629,7 +705,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user"
+      modelProps: "user" | "product" | "estoque" | "venda"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -696,6 +772,204 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>
             result: $Utils.Optional<UserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Product: {
+        payload: Prisma.$ProductPayload<ExtArgs>
+        fields: Prisma.ProductFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProductFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProductFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          findFirst: {
+            args: Prisma.ProductFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProductFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          findMany: {
+            args: Prisma.ProductFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>[]
+          }
+          create: {
+            args: Prisma.ProductCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          createMany: {
+            args: Prisma.ProductCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ProductDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          update: {
+            args: Prisma.ProductUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProductDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProductUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ProductUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProductPayload>
+          }
+          aggregate: {
+            args: Prisma.ProductAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProduct>
+          }
+          groupBy: {
+            args: Prisma.ProductGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProductGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProductCountArgs<ExtArgs>
+            result: $Utils.Optional<ProductCountAggregateOutputType> | number
+          }
+        }
+      }
+      Estoque: {
+        payload: Prisma.$EstoquePayload<ExtArgs>
+        fields: Prisma.EstoqueFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EstoqueFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EstoqueFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>
+          }
+          findFirst: {
+            args: Prisma.EstoqueFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EstoqueFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>
+          }
+          findMany: {
+            args: Prisma.EstoqueFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>[]
+          }
+          create: {
+            args: Prisma.EstoqueCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>
+          }
+          createMany: {
+            args: Prisma.EstoqueCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.EstoqueDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>
+          }
+          update: {
+            args: Prisma.EstoqueUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>
+          }
+          deleteMany: {
+            args: Prisma.EstoqueDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EstoqueUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.EstoqueUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EstoquePayload>
+          }
+          aggregate: {
+            args: Prisma.EstoqueAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEstoque>
+          }
+          groupBy: {
+            args: Prisma.EstoqueGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EstoqueGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EstoqueCountArgs<ExtArgs>
+            result: $Utils.Optional<EstoqueCountAggregateOutputType> | number
+          }
+        }
+      }
+      Venda: {
+        payload: Prisma.$VendaPayload<ExtArgs>
+        fields: Prisma.VendaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.VendaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.VendaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>
+          }
+          findFirst: {
+            args: Prisma.VendaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.VendaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>
+          }
+          findMany: {
+            args: Prisma.VendaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>[]
+          }
+          create: {
+            args: Prisma.VendaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>
+          }
+          createMany: {
+            args: Prisma.VendaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.VendaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>
+          }
+          update: {
+            args: Prisma.VendaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>
+          }
+          deleteMany: {
+            args: Prisma.VendaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.VendaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.VendaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VendaPayload>
+          }
+          aggregate: {
+            args: Prisma.VendaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateVenda>
+          }
+          groupBy: {
+            args: Prisma.VendaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<VendaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.VendaCountArgs<ExtArgs>
+            result: $Utils.Optional<VendaCountAggregateOutputType> | number
           }
         }
       }
@@ -784,6 +1058,9 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     user?: UserOmit
+    product?: ProductOmit
+    estoque?: EstoqueOmit
+    venda?: VendaOmit
   }
 
   /* Types for Logging */
@@ -872,6 +1149,107 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type UserCountOutputType
+   */
+
+  export type UserCountOutputType = {
+    Venda: number
+  }
+
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Venda?: boolean | UserCountOutputTypeCountVendaArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserCountOutputType
+     */
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountVendaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VendaWhereInput
+  }
+
+
+  /**
+   * Count Type ProductCountOutputType
+   */
+
+  export type ProductCountOutputType = {
+    estoques: number
+  }
+
+  export type ProductCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estoques?: boolean | ProductCountOutputTypeCountEstoquesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProductCountOutputType
+     */
+    select?: ProductCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ProductCountOutputType without action
+   */
+  export type ProductCountOutputTypeCountEstoquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EstoqueWhereInput
+  }
+
+
+  /**
+   * Count Type VendaCountOutputType
+   */
+
+  export type VendaCountOutputType = {
+    estoques: number
+    users: number
+  }
+
+  export type VendaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estoques?: boolean | VendaCountOutputTypeCountEstoquesArgs
+    users?: boolean | VendaCountOutputTypeCountUsersArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * VendaCountOutputType without action
+   */
+  export type VendaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VendaCountOutputType
+     */
+    select?: VendaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * VendaCountOutputType without action
+   */
+  export type VendaCountOutputTypeCountEstoquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EstoqueWhereInput
+  }
+
+  /**
+   * VendaCountOutputType without action
+   */
+  export type VendaCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserWhereInput
+  }
 
 
   /**
@@ -1100,6 +1478,8 @@ export namespace Prisma {
     role?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    Venda?: boolean | User$VendaArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
 
@@ -1116,10 +1496,16 @@ export namespace Prisma {
   }
 
   export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "password" | "name" | "img" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Venda?: boolean | User$VendaArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      Venda: Prisma.$VendaPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       email: string
@@ -1469,6 +1855,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    Venda<T extends User$VendaArgs<ExtArgs> = {}>(args?: Subset<T, User$VendaArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1523,6 +1910,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1541,6 +1932,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -1558,6 +1953,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -1607,6 +2006,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -1655,6 +2058,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -1698,6 +2105,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The data needed to create a User.
      */
     data: XOR<UserCreateInput, UserUncheckedCreateInput>
@@ -1726,6 +2137,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -1767,6 +2182,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -1793,6 +2212,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -1813,6 +2236,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.Venda
+   */
+  export type User$VendaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    where?: VendaWhereInput
+    orderBy?: VendaOrderByWithRelationInput | VendaOrderByWithRelationInput[]
+    cursor?: VendaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: VendaScalarFieldEnum | VendaScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1824,6 +2271,3081 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Product
+   */
+
+  export type AggregateProduct = {
+    _count: ProductCountAggregateOutputType | null
+    _avg: ProductAvgAggregateOutputType | null
+    _sum: ProductSumAggregateOutputType | null
+    _min: ProductMinAggregateOutputType | null
+    _max: ProductMaxAggregateOutputType | null
+  }
+
+  export type ProductAvgAggregateOutputType = {
+    id: number | null
+    price: Decimal | null
+    quantity: number | null
+  }
+
+  export type ProductSumAggregateOutputType = {
+    id: number | null
+    price: Decimal | null
+    quantity: number | null
+  }
+
+  export type ProductMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    price: Decimal | null
+    quantity: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    price: Decimal | null
+    quantity: number | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ProductCountAggregateOutputType = {
+    id: number
+    name: number
+    price: number
+    quantity: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ProductAvgAggregateInputType = {
+    id?: true
+    price?: true
+    quantity?: true
+  }
+
+  export type ProductSumAggregateInputType = {
+    id?: true
+    price?: true
+    quantity?: true
+  }
+
+  export type ProductMinAggregateInputType = {
+    id?: true
+    name?: true
+    price?: true
+    quantity?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductMaxAggregateInputType = {
+    id?: true
+    name?: true
+    price?: true
+    quantity?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ProductCountAggregateInputType = {
+    id?: true
+    name?: true
+    price?: true
+    quantity?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ProductAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Product to aggregate.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Products
+    **/
+    _count?: true | ProductCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ProductAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ProductSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProductMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProductMaxAggregateInputType
+  }
+
+  export type GetProductAggregateType<T extends ProductAggregateArgs> = {
+        [P in keyof T & keyof AggregateProduct]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProduct[P]>
+      : GetScalarType<T[P], AggregateProduct[P]>
+  }
+
+
+
+
+  export type ProductGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProductWhereInput
+    orderBy?: ProductOrderByWithAggregationInput | ProductOrderByWithAggregationInput[]
+    by: ProductScalarFieldEnum[] | ProductScalarFieldEnum
+    having?: ProductScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProductCountAggregateInputType | true
+    _avg?: ProductAvgAggregateInputType
+    _sum?: ProductSumAggregateInputType
+    _min?: ProductMinAggregateInputType
+    _max?: ProductMaxAggregateInputType
+  }
+
+  export type ProductGroupByOutputType = {
+    id: number
+    name: string
+    price: Decimal
+    quantity: number
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: ProductCountAggregateOutputType | null
+    _avg: ProductAvgAggregateOutputType | null
+    _sum: ProductSumAggregateOutputType | null
+    _min: ProductMinAggregateOutputType | null
+    _max: ProductMaxAggregateOutputType | null
+  }
+
+  type GetProductGroupByPayload<T extends ProductGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProductGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProductGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProductGroupByOutputType[P]>
+            : GetScalarType<T[P], ProductGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProductSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    price?: boolean
+    quantity?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    estoques?: boolean | Product$estoquesArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["product"]>
+
+
+
+  export type ProductSelectScalar = {
+    id?: boolean
+    name?: boolean
+    price?: boolean
+    quantity?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ProductOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "price" | "quantity" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["product"]>
+  export type ProductInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estoques?: boolean | Product$estoquesArgs<ExtArgs>
+    _count?: boolean | ProductCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ProductPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Product"
+    objects: {
+      estoques: Prisma.$EstoquePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      price: Prisma.Decimal
+      quantity: number
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["product"]>
+    composites: {}
+  }
+
+  type ProductGetPayload<S extends boolean | null | undefined | ProductDefaultArgs> = $Result.GetResult<Prisma.$ProductPayload, S>
+
+  type ProductCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProductFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProductCountAggregateInputType | true
+    }
+
+  export interface ProductDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Product'], meta: { name: 'Product' } }
+    /**
+     * Find zero or one Product that matches the filter.
+     * @param {ProductFindUniqueArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProductFindUniqueArgs>(args: SelectSubset<T, ProductFindUniqueArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Product that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProductFindUniqueOrThrowArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProductFindUniqueOrThrowArgs>(args: SelectSubset<T, ProductFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Product that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductFindFirstArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProductFindFirstArgs>(args?: SelectSubset<T, ProductFindFirstArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Product that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductFindFirstOrThrowArgs} args - Arguments to find a Product
+     * @example
+     * // Get one Product
+     * const product = await prisma.product.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProductFindFirstOrThrowArgs>(args?: SelectSubset<T, ProductFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Products that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Products
+     * const products = await prisma.product.findMany()
+     * 
+     * // Get first 10 Products
+     * const products = await prisma.product.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const productWithIdOnly = await prisma.product.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProductFindManyArgs>(args?: SelectSubset<T, ProductFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Product.
+     * @param {ProductCreateArgs} args - Arguments to create a Product.
+     * @example
+     * // Create one Product
+     * const Product = await prisma.product.create({
+     *   data: {
+     *     // ... data to create a Product
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProductCreateArgs>(args: SelectSubset<T, ProductCreateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Products.
+     * @param {ProductCreateManyArgs} args - Arguments to create many Products.
+     * @example
+     * // Create many Products
+     * const product = await prisma.product.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProductCreateManyArgs>(args?: SelectSubset<T, ProductCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Product.
+     * @param {ProductDeleteArgs} args - Arguments to delete one Product.
+     * @example
+     * // Delete one Product
+     * const Product = await prisma.product.delete({
+     *   where: {
+     *     // ... filter to delete one Product
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProductDeleteArgs>(args: SelectSubset<T, ProductDeleteArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Product.
+     * @param {ProductUpdateArgs} args - Arguments to update one Product.
+     * @example
+     * // Update one Product
+     * const product = await prisma.product.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProductUpdateArgs>(args: SelectSubset<T, ProductUpdateArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Products.
+     * @param {ProductDeleteManyArgs} args - Arguments to filter Products to delete.
+     * @example
+     * // Delete a few Products
+     * const { count } = await prisma.product.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProductDeleteManyArgs>(args?: SelectSubset<T, ProductDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Products.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Products
+     * const product = await prisma.product.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProductUpdateManyArgs>(args: SelectSubset<T, ProductUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Product.
+     * @param {ProductUpsertArgs} args - Arguments to update or create a Product.
+     * @example
+     * // Update or create a Product
+     * const product = await prisma.product.upsert({
+     *   create: {
+     *     // ... data to create a Product
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Product we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProductUpsertArgs>(args: SelectSubset<T, ProductUpsertArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Products.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductCountArgs} args - Arguments to filter Products to count.
+     * @example
+     * // Count the number of Products
+     * const count = await prisma.product.count({
+     *   where: {
+     *     // ... the filter for the Products we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProductCountArgs>(
+      args?: Subset<T, ProductCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProductCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Product.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProductAggregateArgs>(args: Subset<T, ProductAggregateArgs>): Prisma.PrismaPromise<GetProductAggregateType<T>>
+
+    /**
+     * Group by Product.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProductGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProductGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProductGroupByArgs['orderBy'] }
+        : { orderBy?: ProductGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProductGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProductGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Product model
+   */
+  readonly fields: ProductFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Product.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProductClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    estoques<T extends Product$estoquesArgs<ExtArgs> = {}>(args?: Subset<T, Product$estoquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Product model
+   */
+  interface ProductFieldRefs {
+    readonly id: FieldRef<"Product", 'Int'>
+    readonly name: FieldRef<"Product", 'String'>
+    readonly price: FieldRef<"Product", 'Decimal'>
+    readonly quantity: FieldRef<"Product", 'Int'>
+    readonly isActive: FieldRef<"Product", 'Boolean'>
+    readonly createdAt: FieldRef<"Product", 'DateTime'>
+    readonly updatedAt: FieldRef<"Product", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Product findUnique
+   */
+  export type ProductFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product findUniqueOrThrow
+   */
+  export type ProductFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product findFirst
+   */
+  export type ProductFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Products.
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * Product findFirstOrThrow
+   */
+  export type ProductFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Product to fetch.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Products.
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Products.
+     */
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * Product findMany
+   */
+  export type ProductFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter, which Products to fetch.
+     */
+    where?: ProductWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Products to fetch.
+     */
+    orderBy?: ProductOrderByWithRelationInput | ProductOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Products.
+     */
+    cursor?: ProductWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Products from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Products.
+     */
+    skip?: number
+    distinct?: ProductScalarFieldEnum | ProductScalarFieldEnum[]
+  }
+
+  /**
+   * Product create
+   */
+  export type ProductCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Product.
+     */
+    data: XOR<ProductCreateInput, ProductUncheckedCreateInput>
+  }
+
+  /**
+   * Product createMany
+   */
+  export type ProductCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Products.
+     */
+    data: ProductCreateManyInput | ProductCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Product update
+   */
+  export type ProductUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Product.
+     */
+    data: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>
+    /**
+     * Choose, which Product to update.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product updateMany
+   */
+  export type ProductUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Products.
+     */
+    data: XOR<ProductUpdateManyMutationInput, ProductUncheckedUpdateManyInput>
+    /**
+     * Filter which Products to update
+     */
+    where?: ProductWhereInput
+    /**
+     * Limit how many Products to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Product upsert
+   */
+  export type ProductUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Product to update in case it exists.
+     */
+    where: ProductWhereUniqueInput
+    /**
+     * In case the Product found by the `where` argument doesn't exist, create a new Product with this data.
+     */
+    create: XOR<ProductCreateInput, ProductUncheckedCreateInput>
+    /**
+     * In case the Product was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProductUpdateInput, ProductUncheckedUpdateInput>
+  }
+
+  /**
+   * Product delete
+   */
+  export type ProductDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+    /**
+     * Filter which Product to delete.
+     */
+    where: ProductWhereUniqueInput
+  }
+
+  /**
+   * Product deleteMany
+   */
+  export type ProductDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Products to delete
+     */
+    where?: ProductWhereInput
+    /**
+     * Limit how many Products to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Product.estoques
+   */
+  export type Product$estoquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    where?: EstoqueWhereInput
+    orderBy?: EstoqueOrderByWithRelationInput | EstoqueOrderByWithRelationInput[]
+    cursor?: EstoqueWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EstoqueScalarFieldEnum | EstoqueScalarFieldEnum[]
+  }
+
+  /**
+   * Product without action
+   */
+  export type ProductDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Product
+     */
+    select?: ProductSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Product
+     */
+    omit?: ProductOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProductInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Estoque
+   */
+
+  export type AggregateEstoque = {
+    _count: EstoqueCountAggregateOutputType | null
+    _avg: EstoqueAvgAggregateOutputType | null
+    _sum: EstoqueSumAggregateOutputType | null
+    _min: EstoqueMinAggregateOutputType | null
+    _max: EstoqueMaxAggregateOutputType | null
+  }
+
+  export type EstoqueAvgAggregateOutputType = {
+    id: number | null
+    quantidade: number | null
+    produtoId: number | null
+    vendaId: number | null
+  }
+
+  export type EstoqueSumAggregateOutputType = {
+    id: number | null
+    quantidade: number | null
+    produtoId: number | null
+    vendaId: number | null
+  }
+
+  export type EstoqueMinAggregateOutputType = {
+    id: number | null
+    quantidade: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    produtoId: number | null
+    vendaId: number | null
+  }
+
+  export type EstoqueMaxAggregateOutputType = {
+    id: number | null
+    quantidade: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    produtoId: number | null
+    vendaId: number | null
+  }
+
+  export type EstoqueCountAggregateOutputType = {
+    id: number
+    quantidade: number
+    createdAt: number
+    updatedAt: number
+    produtoId: number
+    vendaId: number
+    _all: number
+  }
+
+
+  export type EstoqueAvgAggregateInputType = {
+    id?: true
+    quantidade?: true
+    produtoId?: true
+    vendaId?: true
+  }
+
+  export type EstoqueSumAggregateInputType = {
+    id?: true
+    quantidade?: true
+    produtoId?: true
+    vendaId?: true
+  }
+
+  export type EstoqueMinAggregateInputType = {
+    id?: true
+    quantidade?: true
+    createdAt?: true
+    updatedAt?: true
+    produtoId?: true
+    vendaId?: true
+  }
+
+  export type EstoqueMaxAggregateInputType = {
+    id?: true
+    quantidade?: true
+    createdAt?: true
+    updatedAt?: true
+    produtoId?: true
+    vendaId?: true
+  }
+
+  export type EstoqueCountAggregateInputType = {
+    id?: true
+    quantidade?: true
+    createdAt?: true
+    updatedAt?: true
+    produtoId?: true
+    vendaId?: true
+    _all?: true
+  }
+
+  export type EstoqueAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Estoque to aggregate.
+     */
+    where?: EstoqueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Estoques to fetch.
+     */
+    orderBy?: EstoqueOrderByWithRelationInput | EstoqueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EstoqueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Estoques from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Estoques.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Estoques
+    **/
+    _count?: true | EstoqueCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EstoqueAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EstoqueSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EstoqueMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EstoqueMaxAggregateInputType
+  }
+
+  export type GetEstoqueAggregateType<T extends EstoqueAggregateArgs> = {
+        [P in keyof T & keyof AggregateEstoque]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEstoque[P]>
+      : GetScalarType<T[P], AggregateEstoque[P]>
+  }
+
+
+
+
+  export type EstoqueGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EstoqueWhereInput
+    orderBy?: EstoqueOrderByWithAggregationInput | EstoqueOrderByWithAggregationInput[]
+    by: EstoqueScalarFieldEnum[] | EstoqueScalarFieldEnum
+    having?: EstoqueScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EstoqueCountAggregateInputType | true
+    _avg?: EstoqueAvgAggregateInputType
+    _sum?: EstoqueSumAggregateInputType
+    _min?: EstoqueMinAggregateInputType
+    _max?: EstoqueMaxAggregateInputType
+  }
+
+  export type EstoqueGroupByOutputType = {
+    id: number
+    quantidade: number
+    createdAt: Date
+    updatedAt: Date
+    produtoId: number
+    vendaId: number | null
+    _count: EstoqueCountAggregateOutputType | null
+    _avg: EstoqueAvgAggregateOutputType | null
+    _sum: EstoqueSumAggregateOutputType | null
+    _min: EstoqueMinAggregateOutputType | null
+    _max: EstoqueMaxAggregateOutputType | null
+  }
+
+  type GetEstoqueGroupByPayload<T extends EstoqueGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EstoqueGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EstoqueGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EstoqueGroupByOutputType[P]>
+            : GetScalarType<T[P], EstoqueGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EstoqueSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quantidade?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    produtoId?: boolean
+    vendaId?: boolean
+    produto?: boolean | ProductDefaultArgs<ExtArgs>
+    venda?: boolean | Estoque$vendaArgs<ExtArgs>
+  }, ExtArgs["result"]["estoque"]>
+
+
+
+  export type EstoqueSelectScalar = {
+    id?: boolean
+    quantidade?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    produtoId?: boolean
+    vendaId?: boolean
+  }
+
+  export type EstoqueOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quantidade" | "createdAt" | "updatedAt" | "produtoId" | "vendaId", ExtArgs["result"]["estoque"]>
+  export type EstoqueInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    produto?: boolean | ProductDefaultArgs<ExtArgs>
+    venda?: boolean | Estoque$vendaArgs<ExtArgs>
+  }
+
+  export type $EstoquePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Estoque"
+    objects: {
+      produto: Prisma.$ProductPayload<ExtArgs>
+      venda: Prisma.$VendaPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      quantidade: number
+      createdAt: Date
+      updatedAt: Date
+      produtoId: number
+      vendaId: number | null
+    }, ExtArgs["result"]["estoque"]>
+    composites: {}
+  }
+
+  type EstoqueGetPayload<S extends boolean | null | undefined | EstoqueDefaultArgs> = $Result.GetResult<Prisma.$EstoquePayload, S>
+
+  type EstoqueCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EstoqueFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EstoqueCountAggregateInputType | true
+    }
+
+  export interface EstoqueDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Estoque'], meta: { name: 'Estoque' } }
+    /**
+     * Find zero or one Estoque that matches the filter.
+     * @param {EstoqueFindUniqueArgs} args - Arguments to find a Estoque
+     * @example
+     * // Get one Estoque
+     * const estoque = await prisma.estoque.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EstoqueFindUniqueArgs>(args: SelectSubset<T, EstoqueFindUniqueArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Estoque that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EstoqueFindUniqueOrThrowArgs} args - Arguments to find a Estoque
+     * @example
+     * // Get one Estoque
+     * const estoque = await prisma.estoque.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EstoqueFindUniqueOrThrowArgs>(args: SelectSubset<T, EstoqueFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Estoque that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueFindFirstArgs} args - Arguments to find a Estoque
+     * @example
+     * // Get one Estoque
+     * const estoque = await prisma.estoque.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EstoqueFindFirstArgs>(args?: SelectSubset<T, EstoqueFindFirstArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Estoque that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueFindFirstOrThrowArgs} args - Arguments to find a Estoque
+     * @example
+     * // Get one Estoque
+     * const estoque = await prisma.estoque.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EstoqueFindFirstOrThrowArgs>(args?: SelectSubset<T, EstoqueFindFirstOrThrowArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Estoques that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Estoques
+     * const estoques = await prisma.estoque.findMany()
+     * 
+     * // Get first 10 Estoques
+     * const estoques = await prisma.estoque.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const estoqueWithIdOnly = await prisma.estoque.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EstoqueFindManyArgs>(args?: SelectSubset<T, EstoqueFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Estoque.
+     * @param {EstoqueCreateArgs} args - Arguments to create a Estoque.
+     * @example
+     * // Create one Estoque
+     * const Estoque = await prisma.estoque.create({
+     *   data: {
+     *     // ... data to create a Estoque
+     *   }
+     * })
+     * 
+     */
+    create<T extends EstoqueCreateArgs>(args: SelectSubset<T, EstoqueCreateArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Estoques.
+     * @param {EstoqueCreateManyArgs} args - Arguments to create many Estoques.
+     * @example
+     * // Create many Estoques
+     * const estoque = await prisma.estoque.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EstoqueCreateManyArgs>(args?: SelectSubset<T, EstoqueCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Estoque.
+     * @param {EstoqueDeleteArgs} args - Arguments to delete one Estoque.
+     * @example
+     * // Delete one Estoque
+     * const Estoque = await prisma.estoque.delete({
+     *   where: {
+     *     // ... filter to delete one Estoque
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EstoqueDeleteArgs>(args: SelectSubset<T, EstoqueDeleteArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Estoque.
+     * @param {EstoqueUpdateArgs} args - Arguments to update one Estoque.
+     * @example
+     * // Update one Estoque
+     * const estoque = await prisma.estoque.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EstoqueUpdateArgs>(args: SelectSubset<T, EstoqueUpdateArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Estoques.
+     * @param {EstoqueDeleteManyArgs} args - Arguments to filter Estoques to delete.
+     * @example
+     * // Delete a few Estoques
+     * const { count } = await prisma.estoque.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EstoqueDeleteManyArgs>(args?: SelectSubset<T, EstoqueDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Estoques.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Estoques
+     * const estoque = await prisma.estoque.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EstoqueUpdateManyArgs>(args: SelectSubset<T, EstoqueUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Estoque.
+     * @param {EstoqueUpsertArgs} args - Arguments to update or create a Estoque.
+     * @example
+     * // Update or create a Estoque
+     * const estoque = await prisma.estoque.upsert({
+     *   create: {
+     *     // ... data to create a Estoque
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Estoque we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EstoqueUpsertArgs>(args: SelectSubset<T, EstoqueUpsertArgs<ExtArgs>>): Prisma__EstoqueClient<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Estoques.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueCountArgs} args - Arguments to filter Estoques to count.
+     * @example
+     * // Count the number of Estoques
+     * const count = await prisma.estoque.count({
+     *   where: {
+     *     // ... the filter for the Estoques we want to count
+     *   }
+     * })
+    **/
+    count<T extends EstoqueCountArgs>(
+      args?: Subset<T, EstoqueCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EstoqueCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Estoque.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EstoqueAggregateArgs>(args: Subset<T, EstoqueAggregateArgs>): Prisma.PrismaPromise<GetEstoqueAggregateType<T>>
+
+    /**
+     * Group by Estoque.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EstoqueGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EstoqueGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EstoqueGroupByArgs['orderBy'] }
+        : { orderBy?: EstoqueGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EstoqueGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstoqueGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Estoque model
+   */
+  readonly fields: EstoqueFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Estoque.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EstoqueClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    produto<T extends ProductDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProductDefaultArgs<ExtArgs>>): Prisma__ProductClient<$Result.GetResult<Prisma.$ProductPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    venda<T extends Estoque$vendaArgs<ExtArgs> = {}>(args?: Subset<T, Estoque$vendaArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Estoque model
+   */
+  interface EstoqueFieldRefs {
+    readonly id: FieldRef<"Estoque", 'Int'>
+    readonly quantidade: FieldRef<"Estoque", 'Int'>
+    readonly createdAt: FieldRef<"Estoque", 'DateTime'>
+    readonly updatedAt: FieldRef<"Estoque", 'DateTime'>
+    readonly produtoId: FieldRef<"Estoque", 'Int'>
+    readonly vendaId: FieldRef<"Estoque", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Estoque findUnique
+   */
+  export type EstoqueFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * Filter, which Estoque to fetch.
+     */
+    where: EstoqueWhereUniqueInput
+  }
+
+  /**
+   * Estoque findUniqueOrThrow
+   */
+  export type EstoqueFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * Filter, which Estoque to fetch.
+     */
+    where: EstoqueWhereUniqueInput
+  }
+
+  /**
+   * Estoque findFirst
+   */
+  export type EstoqueFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * Filter, which Estoque to fetch.
+     */
+    where?: EstoqueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Estoques to fetch.
+     */
+    orderBy?: EstoqueOrderByWithRelationInput | EstoqueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Estoques.
+     */
+    cursor?: EstoqueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Estoques from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Estoques.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Estoques.
+     */
+    distinct?: EstoqueScalarFieldEnum | EstoqueScalarFieldEnum[]
+  }
+
+  /**
+   * Estoque findFirstOrThrow
+   */
+  export type EstoqueFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * Filter, which Estoque to fetch.
+     */
+    where?: EstoqueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Estoques to fetch.
+     */
+    orderBy?: EstoqueOrderByWithRelationInput | EstoqueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Estoques.
+     */
+    cursor?: EstoqueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Estoques from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Estoques.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Estoques.
+     */
+    distinct?: EstoqueScalarFieldEnum | EstoqueScalarFieldEnum[]
+  }
+
+  /**
+   * Estoque findMany
+   */
+  export type EstoqueFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * Filter, which Estoques to fetch.
+     */
+    where?: EstoqueWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Estoques to fetch.
+     */
+    orderBy?: EstoqueOrderByWithRelationInput | EstoqueOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Estoques.
+     */
+    cursor?: EstoqueWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Estoques from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Estoques.
+     */
+    skip?: number
+    distinct?: EstoqueScalarFieldEnum | EstoqueScalarFieldEnum[]
+  }
+
+  /**
+   * Estoque create
+   */
+  export type EstoqueCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Estoque.
+     */
+    data: XOR<EstoqueCreateInput, EstoqueUncheckedCreateInput>
+  }
+
+  /**
+   * Estoque createMany
+   */
+  export type EstoqueCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Estoques.
+     */
+    data: EstoqueCreateManyInput | EstoqueCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Estoque update
+   */
+  export type EstoqueUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Estoque.
+     */
+    data: XOR<EstoqueUpdateInput, EstoqueUncheckedUpdateInput>
+    /**
+     * Choose, which Estoque to update.
+     */
+    where: EstoqueWhereUniqueInput
+  }
+
+  /**
+   * Estoque updateMany
+   */
+  export type EstoqueUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Estoques.
+     */
+    data: XOR<EstoqueUpdateManyMutationInput, EstoqueUncheckedUpdateManyInput>
+    /**
+     * Filter which Estoques to update
+     */
+    where?: EstoqueWhereInput
+    /**
+     * Limit how many Estoques to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Estoque upsert
+   */
+  export type EstoqueUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Estoque to update in case it exists.
+     */
+    where: EstoqueWhereUniqueInput
+    /**
+     * In case the Estoque found by the `where` argument doesn't exist, create a new Estoque with this data.
+     */
+    create: XOR<EstoqueCreateInput, EstoqueUncheckedCreateInput>
+    /**
+     * In case the Estoque was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EstoqueUpdateInput, EstoqueUncheckedUpdateInput>
+  }
+
+  /**
+   * Estoque delete
+   */
+  export type EstoqueDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    /**
+     * Filter which Estoque to delete.
+     */
+    where: EstoqueWhereUniqueInput
+  }
+
+  /**
+   * Estoque deleteMany
+   */
+  export type EstoqueDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Estoques to delete
+     */
+    where?: EstoqueWhereInput
+    /**
+     * Limit how many Estoques to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Estoque.venda
+   */
+  export type Estoque$vendaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    where?: VendaWhereInput
+  }
+
+  /**
+   * Estoque without action
+   */
+  export type EstoqueDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Venda
+   */
+
+  export type AggregateVenda = {
+    _count: VendaCountAggregateOutputType | null
+    _avg: VendaAvgAggregateOutputType | null
+    _sum: VendaSumAggregateOutputType | null
+    _min: VendaMinAggregateOutputType | null
+    _max: VendaMaxAggregateOutputType | null
+  }
+
+  export type VendaAvgAggregateOutputType = {
+    id: number | null
+    valor: Decimal | null
+  }
+
+  export type VendaSumAggregateOutputType = {
+    id: number | null
+    valor: Decimal | null
+  }
+
+  export type VendaMinAggregateOutputType = {
+    id: number | null
+    description: string | null
+    status: $Enums.Status | null
+    valor: Decimal | null
+    modalidade: $Enums.Modality | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VendaMaxAggregateOutputType = {
+    id: number | null
+    description: string | null
+    status: $Enums.Status | null
+    valor: Decimal | null
+    modalidade: $Enums.Modality | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type VendaCountAggregateOutputType = {
+    id: number
+    description: number
+    status: number
+    valor: number
+    modalidade: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type VendaAvgAggregateInputType = {
+    id?: true
+    valor?: true
+  }
+
+  export type VendaSumAggregateInputType = {
+    id?: true
+    valor?: true
+  }
+
+  export type VendaMinAggregateInputType = {
+    id?: true
+    description?: true
+    status?: true
+    valor?: true
+    modalidade?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VendaMaxAggregateInputType = {
+    id?: true
+    description?: true
+    status?: true
+    valor?: true
+    modalidade?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type VendaCountAggregateInputType = {
+    id?: true
+    description?: true
+    status?: true
+    valor?: true
+    modalidade?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type VendaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Venda to aggregate.
+     */
+    where?: VendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendas to fetch.
+     */
+    orderBy?: VendaOrderByWithRelationInput | VendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: VendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Vendas
+    **/
+    _count?: true | VendaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: VendaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: VendaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: VendaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: VendaMaxAggregateInputType
+  }
+
+  export type GetVendaAggregateType<T extends VendaAggregateArgs> = {
+        [P in keyof T & keyof AggregateVenda]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateVenda[P]>
+      : GetScalarType<T[P], AggregateVenda[P]>
+  }
+
+
+
+
+  export type VendaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: VendaWhereInput
+    orderBy?: VendaOrderByWithAggregationInput | VendaOrderByWithAggregationInput[]
+    by: VendaScalarFieldEnum[] | VendaScalarFieldEnum
+    having?: VendaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: VendaCountAggregateInputType | true
+    _avg?: VendaAvgAggregateInputType
+    _sum?: VendaSumAggregateInputType
+    _min?: VendaMinAggregateInputType
+    _max?: VendaMaxAggregateInputType
+  }
+
+  export type VendaGroupByOutputType = {
+    id: number
+    description: string
+    status: $Enums.Status
+    valor: Decimal
+    modalidade: $Enums.Modality
+    createdAt: Date
+    updatedAt: Date
+    _count: VendaCountAggregateOutputType | null
+    _avg: VendaAvgAggregateOutputType | null
+    _sum: VendaSumAggregateOutputType | null
+    _min: VendaMinAggregateOutputType | null
+    _max: VendaMaxAggregateOutputType | null
+  }
+
+  type GetVendaGroupByPayload<T extends VendaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<VendaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof VendaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], VendaGroupByOutputType[P]>
+            : GetScalarType<T[P], VendaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type VendaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    description?: boolean
+    status?: boolean
+    valor?: boolean
+    modalidade?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    estoques?: boolean | Venda$estoquesArgs<ExtArgs>
+    users?: boolean | Venda$usersArgs<ExtArgs>
+    _count?: boolean | VendaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["venda"]>
+
+
+
+  export type VendaSelectScalar = {
+    id?: boolean
+    description?: boolean
+    status?: boolean
+    valor?: boolean
+    modalidade?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type VendaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "description" | "status" | "valor" | "modalidade" | "createdAt" | "updatedAt", ExtArgs["result"]["venda"]>
+  export type VendaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estoques?: boolean | Venda$estoquesArgs<ExtArgs>
+    users?: boolean | Venda$usersArgs<ExtArgs>
+    _count?: boolean | VendaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $VendaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Venda"
+    objects: {
+      estoques: Prisma.$EstoquePayload<ExtArgs>[]
+      users: Prisma.$UserPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      description: string
+      status: $Enums.Status
+      valor: Prisma.Decimal
+      modalidade: $Enums.Modality
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["venda"]>
+    composites: {}
+  }
+
+  type VendaGetPayload<S extends boolean | null | undefined | VendaDefaultArgs> = $Result.GetResult<Prisma.$VendaPayload, S>
+
+  type VendaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<VendaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: VendaCountAggregateInputType | true
+    }
+
+  export interface VendaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Venda'], meta: { name: 'Venda' } }
+    /**
+     * Find zero or one Venda that matches the filter.
+     * @param {VendaFindUniqueArgs} args - Arguments to find a Venda
+     * @example
+     * // Get one Venda
+     * const venda = await prisma.venda.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends VendaFindUniqueArgs>(args: SelectSubset<T, VendaFindUniqueArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Venda that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {VendaFindUniqueOrThrowArgs} args - Arguments to find a Venda
+     * @example
+     * // Get one Venda
+     * const venda = await prisma.venda.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends VendaFindUniqueOrThrowArgs>(args: SelectSubset<T, VendaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Venda that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaFindFirstArgs} args - Arguments to find a Venda
+     * @example
+     * // Get one Venda
+     * const venda = await prisma.venda.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends VendaFindFirstArgs>(args?: SelectSubset<T, VendaFindFirstArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Venda that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaFindFirstOrThrowArgs} args - Arguments to find a Venda
+     * @example
+     * // Get one Venda
+     * const venda = await prisma.venda.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends VendaFindFirstOrThrowArgs>(args?: SelectSubset<T, VendaFindFirstOrThrowArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Vendas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Vendas
+     * const vendas = await prisma.venda.findMany()
+     * 
+     * // Get first 10 Vendas
+     * const vendas = await prisma.venda.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const vendaWithIdOnly = await prisma.venda.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends VendaFindManyArgs>(args?: SelectSubset<T, VendaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Venda.
+     * @param {VendaCreateArgs} args - Arguments to create a Venda.
+     * @example
+     * // Create one Venda
+     * const Venda = await prisma.venda.create({
+     *   data: {
+     *     // ... data to create a Venda
+     *   }
+     * })
+     * 
+     */
+    create<T extends VendaCreateArgs>(args: SelectSubset<T, VendaCreateArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Vendas.
+     * @param {VendaCreateManyArgs} args - Arguments to create many Vendas.
+     * @example
+     * // Create many Vendas
+     * const venda = await prisma.venda.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends VendaCreateManyArgs>(args?: SelectSubset<T, VendaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Venda.
+     * @param {VendaDeleteArgs} args - Arguments to delete one Venda.
+     * @example
+     * // Delete one Venda
+     * const Venda = await prisma.venda.delete({
+     *   where: {
+     *     // ... filter to delete one Venda
+     *   }
+     * })
+     * 
+     */
+    delete<T extends VendaDeleteArgs>(args: SelectSubset<T, VendaDeleteArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Venda.
+     * @param {VendaUpdateArgs} args - Arguments to update one Venda.
+     * @example
+     * // Update one Venda
+     * const venda = await prisma.venda.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends VendaUpdateArgs>(args: SelectSubset<T, VendaUpdateArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Vendas.
+     * @param {VendaDeleteManyArgs} args - Arguments to filter Vendas to delete.
+     * @example
+     * // Delete a few Vendas
+     * const { count } = await prisma.venda.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends VendaDeleteManyArgs>(args?: SelectSubset<T, VendaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Vendas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Vendas
+     * const venda = await prisma.venda.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends VendaUpdateManyArgs>(args: SelectSubset<T, VendaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Venda.
+     * @param {VendaUpsertArgs} args - Arguments to update or create a Venda.
+     * @example
+     * // Update or create a Venda
+     * const venda = await prisma.venda.upsert({
+     *   create: {
+     *     // ... data to create a Venda
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Venda we want to update
+     *   }
+     * })
+     */
+    upsert<T extends VendaUpsertArgs>(args: SelectSubset<T, VendaUpsertArgs<ExtArgs>>): Prisma__VendaClient<$Result.GetResult<Prisma.$VendaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Vendas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaCountArgs} args - Arguments to filter Vendas to count.
+     * @example
+     * // Count the number of Vendas
+     * const count = await prisma.venda.count({
+     *   where: {
+     *     // ... the filter for the Vendas we want to count
+     *   }
+     * })
+    **/
+    count<T extends VendaCountArgs>(
+      args?: Subset<T, VendaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], VendaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Venda.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends VendaAggregateArgs>(args: Subset<T, VendaAggregateArgs>): Prisma.PrismaPromise<GetVendaAggregateType<T>>
+
+    /**
+     * Group by Venda.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {VendaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends VendaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: VendaGroupByArgs['orderBy'] }
+        : { orderBy?: VendaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, VendaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetVendaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Venda model
+   */
+  readonly fields: VendaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Venda.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__VendaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    estoques<T extends Venda$estoquesArgs<ExtArgs> = {}>(args?: Subset<T, Venda$estoquesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EstoquePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends Venda$usersArgs<ExtArgs> = {}>(args?: Subset<T, Venda$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Venda model
+   */
+  interface VendaFieldRefs {
+    readonly id: FieldRef<"Venda", 'Int'>
+    readonly description: FieldRef<"Venda", 'String'>
+    readonly status: FieldRef<"Venda", 'Status'>
+    readonly valor: FieldRef<"Venda", 'Decimal'>
+    readonly modalidade: FieldRef<"Venda", 'Modality'>
+    readonly createdAt: FieldRef<"Venda", 'DateTime'>
+    readonly updatedAt: FieldRef<"Venda", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Venda findUnique
+   */
+  export type VendaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * Filter, which Venda to fetch.
+     */
+    where: VendaWhereUniqueInput
+  }
+
+  /**
+   * Venda findUniqueOrThrow
+   */
+  export type VendaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * Filter, which Venda to fetch.
+     */
+    where: VendaWhereUniqueInput
+  }
+
+  /**
+   * Venda findFirst
+   */
+  export type VendaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * Filter, which Venda to fetch.
+     */
+    where?: VendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendas to fetch.
+     */
+    orderBy?: VendaOrderByWithRelationInput | VendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vendas.
+     */
+    cursor?: VendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vendas.
+     */
+    distinct?: VendaScalarFieldEnum | VendaScalarFieldEnum[]
+  }
+
+  /**
+   * Venda findFirstOrThrow
+   */
+  export type VendaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * Filter, which Venda to fetch.
+     */
+    where?: VendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendas to fetch.
+     */
+    orderBy?: VendaOrderByWithRelationInput | VendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Vendas.
+     */
+    cursor?: VendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Vendas.
+     */
+    distinct?: VendaScalarFieldEnum | VendaScalarFieldEnum[]
+  }
+
+  /**
+   * Venda findMany
+   */
+  export type VendaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * Filter, which Vendas to fetch.
+     */
+    where?: VendaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Vendas to fetch.
+     */
+    orderBy?: VendaOrderByWithRelationInput | VendaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Vendas.
+     */
+    cursor?: VendaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Vendas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Vendas.
+     */
+    skip?: number
+    distinct?: VendaScalarFieldEnum | VendaScalarFieldEnum[]
+  }
+
+  /**
+   * Venda create
+   */
+  export type VendaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Venda.
+     */
+    data: XOR<VendaCreateInput, VendaUncheckedCreateInput>
+  }
+
+  /**
+   * Venda createMany
+   */
+  export type VendaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Vendas.
+     */
+    data: VendaCreateManyInput | VendaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Venda update
+   */
+  export type VendaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Venda.
+     */
+    data: XOR<VendaUpdateInput, VendaUncheckedUpdateInput>
+    /**
+     * Choose, which Venda to update.
+     */
+    where: VendaWhereUniqueInput
+  }
+
+  /**
+   * Venda updateMany
+   */
+  export type VendaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Vendas.
+     */
+    data: XOR<VendaUpdateManyMutationInput, VendaUncheckedUpdateManyInput>
+    /**
+     * Filter which Vendas to update
+     */
+    where?: VendaWhereInput
+    /**
+     * Limit how many Vendas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Venda upsert
+   */
+  export type VendaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Venda to update in case it exists.
+     */
+    where: VendaWhereUniqueInput
+    /**
+     * In case the Venda found by the `where` argument doesn't exist, create a new Venda with this data.
+     */
+    create: XOR<VendaCreateInput, VendaUncheckedCreateInput>
+    /**
+     * In case the Venda was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<VendaUpdateInput, VendaUncheckedUpdateInput>
+  }
+
+  /**
+   * Venda delete
+   */
+  export type VendaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
+    /**
+     * Filter which Venda to delete.
+     */
+    where: VendaWhereUniqueInput
+  }
+
+  /**
+   * Venda deleteMany
+   */
+  export type VendaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Vendas to delete
+     */
+    where?: VendaWhereInput
+    /**
+     * Limit how many Vendas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Venda.estoques
+   */
+  export type Venda$estoquesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estoque
+     */
+    select?: EstoqueSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Estoque
+     */
+    omit?: EstoqueOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EstoqueInclude<ExtArgs> | null
+    where?: EstoqueWhereInput
+    orderBy?: EstoqueOrderByWithRelationInput | EstoqueOrderByWithRelationInput[]
+    cursor?: EstoqueWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EstoqueScalarFieldEnum | EstoqueScalarFieldEnum[]
+  }
+
+  /**
+   * Venda.users
+   */
+  export type Venda$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+    orderBy?: UserOrderByWithRelationInput | UserOrderByWithRelationInput[]
+    cursor?: UserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserScalarFieldEnum | UserScalarFieldEnum[]
+  }
+
+  /**
+   * Venda without action
+   */
+  export type VendaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Venda
+     */
+    select?: VendaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Venda
+     */
+    omit?: VendaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VendaInclude<ExtArgs> | null
   }
 
 
@@ -1855,6 +5377,44 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+  export const ProductScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    price: 'price',
+    quantity: 'quantity',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ProductScalarFieldEnum = (typeof ProductScalarFieldEnum)[keyof typeof ProductScalarFieldEnum]
+
+
+  export const EstoqueScalarFieldEnum: {
+    id: 'id',
+    quantidade: 'quantidade',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    produtoId: 'produtoId',
+    vendaId: 'vendaId'
+  };
+
+  export type EstoqueScalarFieldEnum = (typeof EstoqueScalarFieldEnum)[keyof typeof EstoqueScalarFieldEnum]
+
+
+  export const VendaScalarFieldEnum: {
+    id: 'id',
+    description: 'description',
+    status: 'status',
+    valor: 'valor',
+    modalidade: 'modalidade',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type VendaScalarFieldEnum = (typeof VendaScalarFieldEnum)[keyof typeof VendaScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -1879,6 +5439,20 @@ export namespace Prisma {
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+  export const ProductOrderByRelevanceFieldEnum: {
+    name: 'name'
+  };
+
+  export type ProductOrderByRelevanceFieldEnum = (typeof ProductOrderByRelevanceFieldEnum)[keyof typeof ProductOrderByRelevanceFieldEnum]
+
+
+  export const VendaOrderByRelevanceFieldEnum: {
+    description: 'description'
+  };
+
+  export type VendaOrderByRelevanceFieldEnum = (typeof VendaOrderByRelevanceFieldEnum)[keyof typeof VendaOrderByRelevanceFieldEnum]
 
 
   /**
@@ -1915,6 +5489,34 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Decimal'
+   */
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Status'
+   */
+  export type EnumStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Status'>
+    
+
+
+  /**
+   * Reference to a field of type 'Modality'
+   */
+  export type EnumModalityFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Modality'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -1936,6 +5538,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    Venda?: VendaListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -1947,6 +5550,7 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    Venda?: VendaOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -1962,6 +5566,7 @@ export namespace Prisma {
     role?: EnumRoleFilter<"User"> | $Enums.Role
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    Venda?: VendaListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -1994,6 +5599,210 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
+  export type ProductWhereInput = {
+    AND?: ProductWhereInput | ProductWhereInput[]
+    OR?: ProductWhereInput[]
+    NOT?: ProductWhereInput | ProductWhereInput[]
+    id?: IntFilter<"Product"> | number
+    name?: StringFilter<"Product"> | string
+    price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    quantity?: IntFilter<"Product"> | number
+    isActive?: BoolFilter<"Product"> | boolean
+    createdAt?: DateTimeFilter<"Product"> | Date | string
+    updatedAt?: DateTimeFilter<"Product"> | Date | string
+    estoques?: EstoqueListRelationFilter
+  }
+
+  export type ProductOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    estoques?: EstoqueOrderByRelationAggregateInput
+    _relevance?: ProductOrderByRelevanceInput
+  }
+
+  export type ProductWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ProductWhereInput | ProductWhereInput[]
+    OR?: ProductWhereInput[]
+    NOT?: ProductWhereInput | ProductWhereInput[]
+    name?: StringFilter<"Product"> | string
+    price?: DecimalFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    quantity?: IntFilter<"Product"> | number
+    isActive?: BoolFilter<"Product"> | boolean
+    createdAt?: DateTimeFilter<"Product"> | Date | string
+    updatedAt?: DateTimeFilter<"Product"> | Date | string
+    estoques?: EstoqueListRelationFilter
+  }, "id">
+
+  export type ProductOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ProductCountOrderByAggregateInput
+    _avg?: ProductAvgOrderByAggregateInput
+    _max?: ProductMaxOrderByAggregateInput
+    _min?: ProductMinOrderByAggregateInput
+    _sum?: ProductSumOrderByAggregateInput
+  }
+
+  export type ProductScalarWhereWithAggregatesInput = {
+    AND?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
+    OR?: ProductScalarWhereWithAggregatesInput[]
+    NOT?: ProductScalarWhereWithAggregatesInput | ProductScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Product"> | number
+    name?: StringWithAggregatesFilter<"Product"> | string
+    price?: DecimalWithAggregatesFilter<"Product"> | Decimal | DecimalJsLike | number | string
+    quantity?: IntWithAggregatesFilter<"Product"> | number
+    isActive?: BoolWithAggregatesFilter<"Product"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Product"> | Date | string
+  }
+
+  export type EstoqueWhereInput = {
+    AND?: EstoqueWhereInput | EstoqueWhereInput[]
+    OR?: EstoqueWhereInput[]
+    NOT?: EstoqueWhereInput | EstoqueWhereInput[]
+    id?: IntFilter<"Estoque"> | number
+    quantidade?: IntFilter<"Estoque"> | number
+    createdAt?: DateTimeFilter<"Estoque"> | Date | string
+    updatedAt?: DateTimeFilter<"Estoque"> | Date | string
+    produtoId?: IntFilter<"Estoque"> | number
+    vendaId?: IntNullableFilter<"Estoque"> | number | null
+    produto?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    venda?: XOR<VendaNullableScalarRelationFilter, VendaWhereInput> | null
+  }
+
+  export type EstoqueOrderByWithRelationInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrderInput | SortOrder
+    produto?: ProductOrderByWithRelationInput
+    venda?: VendaOrderByWithRelationInput
+  }
+
+  export type EstoqueWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: EstoqueWhereInput | EstoqueWhereInput[]
+    OR?: EstoqueWhereInput[]
+    NOT?: EstoqueWhereInput | EstoqueWhereInput[]
+    quantidade?: IntFilter<"Estoque"> | number
+    createdAt?: DateTimeFilter<"Estoque"> | Date | string
+    updatedAt?: DateTimeFilter<"Estoque"> | Date | string
+    produtoId?: IntFilter<"Estoque"> | number
+    vendaId?: IntNullableFilter<"Estoque"> | number | null
+    produto?: XOR<ProductScalarRelationFilter, ProductWhereInput>
+    venda?: XOR<VendaNullableScalarRelationFilter, VendaWhereInput> | null
+  }, "id">
+
+  export type EstoqueOrderByWithAggregationInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrderInput | SortOrder
+    _count?: EstoqueCountOrderByAggregateInput
+    _avg?: EstoqueAvgOrderByAggregateInput
+    _max?: EstoqueMaxOrderByAggregateInput
+    _min?: EstoqueMinOrderByAggregateInput
+    _sum?: EstoqueSumOrderByAggregateInput
+  }
+
+  export type EstoqueScalarWhereWithAggregatesInput = {
+    AND?: EstoqueScalarWhereWithAggregatesInput | EstoqueScalarWhereWithAggregatesInput[]
+    OR?: EstoqueScalarWhereWithAggregatesInput[]
+    NOT?: EstoqueScalarWhereWithAggregatesInput | EstoqueScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Estoque"> | number
+    quantidade?: IntWithAggregatesFilter<"Estoque"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Estoque"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Estoque"> | Date | string
+    produtoId?: IntWithAggregatesFilter<"Estoque"> | number
+    vendaId?: IntNullableWithAggregatesFilter<"Estoque"> | number | null
+  }
+
+  export type VendaWhereInput = {
+    AND?: VendaWhereInput | VendaWhereInput[]
+    OR?: VendaWhereInput[]
+    NOT?: VendaWhereInput | VendaWhereInput[]
+    id?: IntFilter<"Venda"> | number
+    description?: StringFilter<"Venda"> | string
+    status?: EnumStatusFilter<"Venda"> | $Enums.Status
+    valor?: DecimalFilter<"Venda"> | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFilter<"Venda"> | $Enums.Modality
+    createdAt?: DateTimeFilter<"Venda"> | Date | string
+    updatedAt?: DateTimeFilter<"Venda"> | Date | string
+    estoques?: EstoqueListRelationFilter
+    users?: UserListRelationFilter
+  }
+
+  export type VendaOrderByWithRelationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    valor?: SortOrder
+    modalidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    estoques?: EstoqueOrderByRelationAggregateInput
+    users?: UserOrderByRelationAggregateInput
+    _relevance?: VendaOrderByRelevanceInput
+  }
+
+  export type VendaWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: VendaWhereInput | VendaWhereInput[]
+    OR?: VendaWhereInput[]
+    NOT?: VendaWhereInput | VendaWhereInput[]
+    description?: StringFilter<"Venda"> | string
+    status?: EnumStatusFilter<"Venda"> | $Enums.Status
+    valor?: DecimalFilter<"Venda"> | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFilter<"Venda"> | $Enums.Modality
+    createdAt?: DateTimeFilter<"Venda"> | Date | string
+    updatedAt?: DateTimeFilter<"Venda"> | Date | string
+    estoques?: EstoqueListRelationFilter
+    users?: UserListRelationFilter
+  }, "id">
+
+  export type VendaOrderByWithAggregationInput = {
+    id?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    valor?: SortOrder
+    modalidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: VendaCountOrderByAggregateInput
+    _avg?: VendaAvgOrderByAggregateInput
+    _max?: VendaMaxOrderByAggregateInput
+    _min?: VendaMinOrderByAggregateInput
+    _sum?: VendaSumOrderByAggregateInput
+  }
+
+  export type VendaScalarWhereWithAggregatesInput = {
+    AND?: VendaScalarWhereWithAggregatesInput | VendaScalarWhereWithAggregatesInput[]
+    OR?: VendaScalarWhereWithAggregatesInput[]
+    NOT?: VendaScalarWhereWithAggregatesInput | VendaScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Venda"> | number
+    description?: StringWithAggregatesFilter<"Venda"> | string
+    status?: EnumStatusWithAggregatesFilter<"Venda"> | $Enums.Status
+    valor?: DecimalWithAggregatesFilter<"Venda"> | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityWithAggregatesFilter<"Venda"> | $Enums.Modality
+    createdAt?: DateTimeWithAggregatesFilter<"Venda"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Venda"> | Date | string
+  }
+
   export type UserCreateInput = {
     email: string
     password: string
@@ -2002,6 +5811,7 @@ export namespace Prisma {
     role: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
+    Venda?: VendaCreateNestedManyWithoutUsersInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -2013,6 +5823,7 @@ export namespace Prisma {
     role: $Enums.Role
     createdAt?: Date | string
     updatedAt?: Date | string
+    Venda?: VendaUncheckedCreateNestedManyWithoutUsersInput
   }
 
   export type UserUpdateInput = {
@@ -2023,6 +5834,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Venda?: VendaUpdateManyWithoutUsersNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -2034,6 +5846,7 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    Venda?: VendaUncheckedUpdateManyWithoutUsersNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -2064,6 +5877,210 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     img?: NullableStringFieldUpdateOperationsInput | string | null
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductCreateInput = {
+    name: string
+    price: Decimal | DecimalJsLike | number | string
+    quantity: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    estoques?: EstoqueCreateNestedManyWithoutProdutoInput
+  }
+
+  export type ProductUncheckedCreateInput = {
+    id?: number
+    name: string
+    price: Decimal | DecimalJsLike | number | string
+    quantity: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    estoques?: EstoqueUncheckedCreateNestedManyWithoutProdutoInput
+  }
+
+  export type ProductUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    estoques?: EstoqueUpdateManyWithoutProdutoNestedInput
+  }
+
+  export type ProductUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    estoques?: EstoqueUncheckedUpdateManyWithoutProdutoNestedInput
+  }
+
+  export type ProductCreateManyInput = {
+    id?: number
+    name: string
+    price: Decimal | DecimalJsLike | number | string
+    quantity: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstoqueCreateInput = {
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produto: ProductCreateNestedOneWithoutEstoquesInput
+    venda?: VendaCreateNestedOneWithoutEstoquesInput
+  }
+
+  export type EstoqueUncheckedCreateInput = {
+    id?: number
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produtoId: number
+    vendaId?: number | null
+  }
+
+  export type EstoqueUpdateInput = {
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produto?: ProductUpdateOneRequiredWithoutEstoquesNestedInput
+    venda?: VendaUpdateOneWithoutEstoquesNestedInput
+  }
+
+  export type EstoqueUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtoId?: IntFieldUpdateOperationsInput | number
+    vendaId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type EstoqueCreateManyInput = {
+    id?: number
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produtoId: number
+    vendaId?: number | null
+  }
+
+  export type EstoqueUpdateManyMutationInput = {
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstoqueUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtoId?: IntFieldUpdateOperationsInput | number
+    vendaId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type VendaCreateInput = {
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    estoques?: EstoqueCreateNestedManyWithoutVendaInput
+    users?: UserCreateNestedManyWithoutVendaInput
+  }
+
+  export type VendaUncheckedCreateInput = {
+    id?: number
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    estoques?: EstoqueUncheckedCreateNestedManyWithoutVendaInput
+    users?: UserUncheckedCreateNestedManyWithoutVendaInput
+  }
+
+  export type VendaUpdateInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    estoques?: EstoqueUpdateManyWithoutVendaNestedInput
+    users?: UserUpdateManyWithoutVendaNestedInput
+  }
+
+  export type VendaUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    estoques?: EstoqueUncheckedUpdateManyWithoutVendaNestedInput
+    users?: UserUncheckedUpdateManyWithoutVendaNestedInput
+  }
+
+  export type VendaCreateManyInput = {
+    id?: number
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type VendaUpdateManyMutationInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VendaUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -2127,9 +6144,19 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type VendaListRelationFilter = {
+    every?: VendaWhereInput
+    some?: VendaWhereInput
+    none?: VendaWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type VendaOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserOrderByRelevanceInput = {
@@ -2255,6 +6282,284 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type EstoqueListRelationFilter = {
+    every?: EstoqueWhereInput
+    some?: EstoqueWhereInput
+    none?: EstoqueWhereInput
+  }
+
+  export type EstoqueOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ProductOrderByRelevanceInput = {
+    fields: ProductOrderByRelevanceFieldEnum | ProductOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ProductCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductAvgOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type ProductMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ProductSumOrderByAggregateInput = {
+    id?: SortOrder
+    price?: SortOrder
+    quantity?: SortOrder
+  }
+
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type ProductScalarRelationFilter = {
+    is?: ProductWhereInput
+    isNot?: ProductWhereInput
+  }
+
+  export type VendaNullableScalarRelationFilter = {
+    is?: VendaWhereInput | null
+    isNot?: VendaWhereInput | null
+  }
+
+  export type EstoqueCountOrderByAggregateInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrder
+  }
+
+  export type EstoqueAvgOrderByAggregateInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrder
+  }
+
+  export type EstoqueMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrder
+  }
+
+  export type EstoqueMinOrderByAggregateInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrder
+  }
+
+  export type EstoqueSumOrderByAggregateInput = {
+    id?: SortOrder
+    quantidade?: SortOrder
+    produtoId?: SortOrder
+    vendaId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type EnumModalityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Modality | EnumModalityFieldRefInput<$PrismaModel>
+    in?: $Enums.Modality[]
+    notIn?: $Enums.Modality[]
+    not?: NestedEnumModalityFilter<$PrismaModel> | $Enums.Modality
+  }
+
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type VendaOrderByRelevanceInput = {
+    fields: VendaOrderByRelevanceFieldEnum | VendaOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type VendaCountOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    valor?: SortOrder
+    modalidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VendaAvgOrderByAggregateInput = {
+    id?: SortOrder
+    valor?: SortOrder
+  }
+
+  export type VendaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    valor?: SortOrder
+    modalidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VendaMinOrderByAggregateInput = {
+    id?: SortOrder
+    description?: SortOrder
+    status?: SortOrder
+    valor?: SortOrder
+    modalidade?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type VendaSumOrderByAggregateInput = {
+    id?: SortOrder
+    valor?: SortOrder
+  }
+
+  export type EnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type EnumModalityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Modality | EnumModalityFieldRefInput<$PrismaModel>
+    in?: $Enums.Modality[]
+    notIn?: $Enums.Modality[]
+    not?: NestedEnumModalityWithAggregatesFilter<$PrismaModel> | $Enums.Modality
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumModalityFilter<$PrismaModel>
+    _max?: NestedEnumModalityFilter<$PrismaModel>
+  }
+
+  export type VendaCreateNestedManyWithoutUsersInput = {
+    create?: XOR<VendaCreateWithoutUsersInput, VendaUncheckedCreateWithoutUsersInput> | VendaCreateWithoutUsersInput[] | VendaUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: VendaCreateOrConnectWithoutUsersInput | VendaCreateOrConnectWithoutUsersInput[]
+    connect?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+  }
+
+  export type VendaUncheckedCreateNestedManyWithoutUsersInput = {
+    create?: XOR<VendaCreateWithoutUsersInput, VendaUncheckedCreateWithoutUsersInput> | VendaCreateWithoutUsersInput[] | VendaUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: VendaCreateOrConnectWithoutUsersInput | VendaCreateOrConnectWithoutUsersInput[]
+    connect?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
@@ -2271,12 +6576,218 @@ export namespace Prisma {
     set?: Date | string
   }
 
+  export type VendaUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<VendaCreateWithoutUsersInput, VendaUncheckedCreateWithoutUsersInput> | VendaCreateWithoutUsersInput[] | VendaUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: VendaCreateOrConnectWithoutUsersInput | VendaCreateOrConnectWithoutUsersInput[]
+    upsert?: VendaUpsertWithWhereUniqueWithoutUsersInput | VendaUpsertWithWhereUniqueWithoutUsersInput[]
+    set?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    disconnect?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    delete?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    connect?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    update?: VendaUpdateWithWhereUniqueWithoutUsersInput | VendaUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: VendaUpdateManyWithWhereWithoutUsersInput | VendaUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: VendaScalarWhereInput | VendaScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type VendaUncheckedUpdateManyWithoutUsersNestedInput = {
+    create?: XOR<VendaCreateWithoutUsersInput, VendaUncheckedCreateWithoutUsersInput> | VendaCreateWithoutUsersInput[] | VendaUncheckedCreateWithoutUsersInput[]
+    connectOrCreate?: VendaCreateOrConnectWithoutUsersInput | VendaCreateOrConnectWithoutUsersInput[]
+    upsert?: VendaUpsertWithWhereUniqueWithoutUsersInput | VendaUpsertWithWhereUniqueWithoutUsersInput[]
+    set?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    disconnect?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    delete?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    connect?: VendaWhereUniqueInput | VendaWhereUniqueInput[]
+    update?: VendaUpdateWithWhereUniqueWithoutUsersInput | VendaUpdateWithWhereUniqueWithoutUsersInput[]
+    updateMany?: VendaUpdateManyWithWhereWithoutUsersInput | VendaUpdateManyWithWhereWithoutUsersInput[]
+    deleteMany?: VendaScalarWhereInput | VendaScalarWhereInput[]
+  }
+
+  export type EstoqueCreateNestedManyWithoutProdutoInput = {
+    create?: XOR<EstoqueCreateWithoutProdutoInput, EstoqueUncheckedCreateWithoutProdutoInput> | EstoqueCreateWithoutProdutoInput[] | EstoqueUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutProdutoInput | EstoqueCreateOrConnectWithoutProdutoInput[]
+    createMany?: EstoqueCreateManyProdutoInputEnvelope
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+  }
+
+  export type EstoqueUncheckedCreateNestedManyWithoutProdutoInput = {
+    create?: XOR<EstoqueCreateWithoutProdutoInput, EstoqueUncheckedCreateWithoutProdutoInput> | EstoqueCreateWithoutProdutoInput[] | EstoqueUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutProdutoInput | EstoqueCreateOrConnectWithoutProdutoInput[]
+    createMany?: EstoqueCreateManyProdutoInputEnvelope
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+  }
+
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type EstoqueUpdateManyWithoutProdutoNestedInput = {
+    create?: XOR<EstoqueCreateWithoutProdutoInput, EstoqueUncheckedCreateWithoutProdutoInput> | EstoqueCreateWithoutProdutoInput[] | EstoqueUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutProdutoInput | EstoqueCreateOrConnectWithoutProdutoInput[]
+    upsert?: EstoqueUpsertWithWhereUniqueWithoutProdutoInput | EstoqueUpsertWithWhereUniqueWithoutProdutoInput[]
+    createMany?: EstoqueCreateManyProdutoInputEnvelope
+    set?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    disconnect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    delete?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    update?: EstoqueUpdateWithWhereUniqueWithoutProdutoInput | EstoqueUpdateWithWhereUniqueWithoutProdutoInput[]
+    updateMany?: EstoqueUpdateManyWithWhereWithoutProdutoInput | EstoqueUpdateManyWithWhereWithoutProdutoInput[]
+    deleteMany?: EstoqueScalarWhereInput | EstoqueScalarWhereInput[]
+  }
+
+  export type EstoqueUncheckedUpdateManyWithoutProdutoNestedInput = {
+    create?: XOR<EstoqueCreateWithoutProdutoInput, EstoqueUncheckedCreateWithoutProdutoInput> | EstoqueCreateWithoutProdutoInput[] | EstoqueUncheckedCreateWithoutProdutoInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutProdutoInput | EstoqueCreateOrConnectWithoutProdutoInput[]
+    upsert?: EstoqueUpsertWithWhereUniqueWithoutProdutoInput | EstoqueUpsertWithWhereUniqueWithoutProdutoInput[]
+    createMany?: EstoqueCreateManyProdutoInputEnvelope
+    set?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    disconnect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    delete?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    update?: EstoqueUpdateWithWhereUniqueWithoutProdutoInput | EstoqueUpdateWithWhereUniqueWithoutProdutoInput[]
+    updateMany?: EstoqueUpdateManyWithWhereWithoutProdutoInput | EstoqueUpdateManyWithWhereWithoutProdutoInput[]
+    deleteMany?: EstoqueScalarWhereInput | EstoqueScalarWhereInput[]
+  }
+
+  export type ProductCreateNestedOneWithoutEstoquesInput = {
+    create?: XOR<ProductCreateWithoutEstoquesInput, ProductUncheckedCreateWithoutEstoquesInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutEstoquesInput
+    connect?: ProductWhereUniqueInput
+  }
+
+  export type VendaCreateNestedOneWithoutEstoquesInput = {
+    create?: XOR<VendaCreateWithoutEstoquesInput, VendaUncheckedCreateWithoutEstoquesInput>
+    connectOrCreate?: VendaCreateOrConnectWithoutEstoquesInput
+    connect?: VendaWhereUniqueInput
+  }
+
+  export type ProductUpdateOneRequiredWithoutEstoquesNestedInput = {
+    create?: XOR<ProductCreateWithoutEstoquesInput, ProductUncheckedCreateWithoutEstoquesInput>
+    connectOrCreate?: ProductCreateOrConnectWithoutEstoquesInput
+    upsert?: ProductUpsertWithoutEstoquesInput
+    connect?: ProductWhereUniqueInput
+    update?: XOR<XOR<ProductUpdateToOneWithWhereWithoutEstoquesInput, ProductUpdateWithoutEstoquesInput>, ProductUncheckedUpdateWithoutEstoquesInput>
+  }
+
+  export type VendaUpdateOneWithoutEstoquesNestedInput = {
+    create?: XOR<VendaCreateWithoutEstoquesInput, VendaUncheckedCreateWithoutEstoquesInput>
+    connectOrCreate?: VendaCreateOrConnectWithoutEstoquesInput
+    upsert?: VendaUpsertWithoutEstoquesInput
+    disconnect?: VendaWhereInput | boolean
+    delete?: VendaWhereInput | boolean
+    connect?: VendaWhereUniqueInput
+    update?: XOR<XOR<VendaUpdateToOneWithWhereWithoutEstoquesInput, VendaUpdateWithoutEstoquesInput>, VendaUncheckedUpdateWithoutEstoquesInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type EstoqueCreateNestedManyWithoutVendaInput = {
+    create?: XOR<EstoqueCreateWithoutVendaInput, EstoqueUncheckedCreateWithoutVendaInput> | EstoqueCreateWithoutVendaInput[] | EstoqueUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutVendaInput | EstoqueCreateOrConnectWithoutVendaInput[]
+    createMany?: EstoqueCreateManyVendaInputEnvelope
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+  }
+
+  export type UserCreateNestedManyWithoutVendaInput = {
+    create?: XOR<UserCreateWithoutVendaInput, UserUncheckedCreateWithoutVendaInput> | UserCreateWithoutVendaInput[] | UserUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutVendaInput | UserCreateOrConnectWithoutVendaInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type EstoqueUncheckedCreateNestedManyWithoutVendaInput = {
+    create?: XOR<EstoqueCreateWithoutVendaInput, EstoqueUncheckedCreateWithoutVendaInput> | EstoqueCreateWithoutVendaInput[] | EstoqueUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutVendaInput | EstoqueCreateOrConnectWithoutVendaInput[]
+    createMany?: EstoqueCreateManyVendaInputEnvelope
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+  }
+
+  export type UserUncheckedCreateNestedManyWithoutVendaInput = {
+    create?: XOR<UserCreateWithoutVendaInput, UserUncheckedCreateWithoutVendaInput> | UserCreateWithoutVendaInput[] | UserUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutVendaInput | UserCreateOrConnectWithoutVendaInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+  }
+
+  export type EnumStatusFieldUpdateOperationsInput = {
+    set?: $Enums.Status
+  }
+
+  export type EnumModalityFieldUpdateOperationsInput = {
+    set?: $Enums.Modality
+  }
+
+  export type EstoqueUpdateManyWithoutVendaNestedInput = {
+    create?: XOR<EstoqueCreateWithoutVendaInput, EstoqueUncheckedCreateWithoutVendaInput> | EstoqueCreateWithoutVendaInput[] | EstoqueUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutVendaInput | EstoqueCreateOrConnectWithoutVendaInput[]
+    upsert?: EstoqueUpsertWithWhereUniqueWithoutVendaInput | EstoqueUpsertWithWhereUniqueWithoutVendaInput[]
+    createMany?: EstoqueCreateManyVendaInputEnvelope
+    set?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    disconnect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    delete?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    update?: EstoqueUpdateWithWhereUniqueWithoutVendaInput | EstoqueUpdateWithWhereUniqueWithoutVendaInput[]
+    updateMany?: EstoqueUpdateManyWithWhereWithoutVendaInput | EstoqueUpdateManyWithWhereWithoutVendaInput[]
+    deleteMany?: EstoqueScalarWhereInput | EstoqueScalarWhereInput[]
+  }
+
+  export type UserUpdateManyWithoutVendaNestedInput = {
+    create?: XOR<UserCreateWithoutVendaInput, UserUncheckedCreateWithoutVendaInput> | UserCreateWithoutVendaInput[] | UserUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutVendaInput | UserCreateOrConnectWithoutVendaInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutVendaInput | UserUpsertWithWhereUniqueWithoutVendaInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutVendaInput | UserUpdateWithWhereUniqueWithoutVendaInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutVendaInput | UserUpdateManyWithWhereWithoutVendaInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
+  }
+
+  export type EstoqueUncheckedUpdateManyWithoutVendaNestedInput = {
+    create?: XOR<EstoqueCreateWithoutVendaInput, EstoqueUncheckedCreateWithoutVendaInput> | EstoqueCreateWithoutVendaInput[] | EstoqueUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: EstoqueCreateOrConnectWithoutVendaInput | EstoqueCreateOrConnectWithoutVendaInput[]
+    upsert?: EstoqueUpsertWithWhereUniqueWithoutVendaInput | EstoqueUpsertWithWhereUniqueWithoutVendaInput[]
+    createMany?: EstoqueCreateManyVendaInputEnvelope
+    set?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    disconnect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    delete?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    connect?: EstoqueWhereUniqueInput | EstoqueWhereUniqueInput[]
+    update?: EstoqueUpdateWithWhereUniqueWithoutVendaInput | EstoqueUpdateWithWhereUniqueWithoutVendaInput[]
+    updateMany?: EstoqueUpdateManyWithWhereWithoutVendaInput | EstoqueUpdateManyWithWhereWithoutVendaInput[]
+    deleteMany?: EstoqueScalarWhereInput | EstoqueScalarWhereInput[]
+  }
+
+  export type UserUncheckedUpdateManyWithoutVendaNestedInput = {
+    create?: XOR<UserCreateWithoutVendaInput, UserUncheckedCreateWithoutVendaInput> | UserCreateWithoutVendaInput[] | UserUncheckedCreateWithoutVendaInput[]
+    connectOrCreate?: UserCreateOrConnectWithoutVendaInput | UserCreateOrConnectWithoutVendaInput[]
+    upsert?: UserUpsertWithWhereUniqueWithoutVendaInput | UserUpsertWithWhereUniqueWithoutVendaInput[]
+    set?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    disconnect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    delete?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
+    update?: UserUpdateWithWhereUniqueWithoutVendaInput | UserUpdateWithWhereUniqueWithoutVendaInput[]
+    updateMany?: UserUpdateManyWithWhereWithoutVendaInput | UserUpdateManyWithWhereWithoutVendaInput[]
+    deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -2434,6 +6945,549 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedEnumStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusFilter<$PrismaModel> | $Enums.Status
+  }
+
+  export type NestedEnumModalityFilter<$PrismaModel = never> = {
+    equals?: $Enums.Modality | EnumModalityFieldRefInput<$PrismaModel>
+    in?: $Enums.Modality[]
+    notIn?: $Enums.Modality[]
+    not?: NestedEnumModalityFilter<$PrismaModel> | $Enums.Modality
+  }
+
+  export type NestedEnumStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Status | EnumStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.Status[]
+    notIn?: $Enums.Status[]
+    not?: NestedEnumStatusWithAggregatesFilter<$PrismaModel> | $Enums.Status
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumStatusFilter<$PrismaModel>
+    _max?: NestedEnumStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumModalityWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.Modality | EnumModalityFieldRefInput<$PrismaModel>
+    in?: $Enums.Modality[]
+    notIn?: $Enums.Modality[]
+    not?: NestedEnumModalityWithAggregatesFilter<$PrismaModel> | $Enums.Modality
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumModalityFilter<$PrismaModel>
+    _max?: NestedEnumModalityFilter<$PrismaModel>
+  }
+
+  export type VendaCreateWithoutUsersInput = {
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    estoques?: EstoqueCreateNestedManyWithoutVendaInput
+  }
+
+  export type VendaUncheckedCreateWithoutUsersInput = {
+    id?: number
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    estoques?: EstoqueUncheckedCreateNestedManyWithoutVendaInput
+  }
+
+  export type VendaCreateOrConnectWithoutUsersInput = {
+    where: VendaWhereUniqueInput
+    create: XOR<VendaCreateWithoutUsersInput, VendaUncheckedCreateWithoutUsersInput>
+  }
+
+  export type VendaUpsertWithWhereUniqueWithoutUsersInput = {
+    where: VendaWhereUniqueInput
+    update: XOR<VendaUpdateWithoutUsersInput, VendaUncheckedUpdateWithoutUsersInput>
+    create: XOR<VendaCreateWithoutUsersInput, VendaUncheckedCreateWithoutUsersInput>
+  }
+
+  export type VendaUpdateWithWhereUniqueWithoutUsersInput = {
+    where: VendaWhereUniqueInput
+    data: XOR<VendaUpdateWithoutUsersInput, VendaUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type VendaUpdateManyWithWhereWithoutUsersInput = {
+    where: VendaScalarWhereInput
+    data: XOR<VendaUpdateManyMutationInput, VendaUncheckedUpdateManyWithoutUsersInput>
+  }
+
+  export type VendaScalarWhereInput = {
+    AND?: VendaScalarWhereInput | VendaScalarWhereInput[]
+    OR?: VendaScalarWhereInput[]
+    NOT?: VendaScalarWhereInput | VendaScalarWhereInput[]
+    id?: IntFilter<"Venda"> | number
+    description?: StringFilter<"Venda"> | string
+    status?: EnumStatusFilter<"Venda"> | $Enums.Status
+    valor?: DecimalFilter<"Venda"> | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFilter<"Venda"> | $Enums.Modality
+    createdAt?: DateTimeFilter<"Venda"> | Date | string
+    updatedAt?: DateTimeFilter<"Venda"> | Date | string
+  }
+
+  export type EstoqueCreateWithoutProdutoInput = {
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    venda?: VendaCreateNestedOneWithoutEstoquesInput
+  }
+
+  export type EstoqueUncheckedCreateWithoutProdutoInput = {
+    id?: number
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    vendaId?: number | null
+  }
+
+  export type EstoqueCreateOrConnectWithoutProdutoInput = {
+    where: EstoqueWhereUniqueInput
+    create: XOR<EstoqueCreateWithoutProdutoInput, EstoqueUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type EstoqueCreateManyProdutoInputEnvelope = {
+    data: EstoqueCreateManyProdutoInput | EstoqueCreateManyProdutoInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EstoqueUpsertWithWhereUniqueWithoutProdutoInput = {
+    where: EstoqueWhereUniqueInput
+    update: XOR<EstoqueUpdateWithoutProdutoInput, EstoqueUncheckedUpdateWithoutProdutoInput>
+    create: XOR<EstoqueCreateWithoutProdutoInput, EstoqueUncheckedCreateWithoutProdutoInput>
+  }
+
+  export type EstoqueUpdateWithWhereUniqueWithoutProdutoInput = {
+    where: EstoqueWhereUniqueInput
+    data: XOR<EstoqueUpdateWithoutProdutoInput, EstoqueUncheckedUpdateWithoutProdutoInput>
+  }
+
+  export type EstoqueUpdateManyWithWhereWithoutProdutoInput = {
+    where: EstoqueScalarWhereInput
+    data: XOR<EstoqueUpdateManyMutationInput, EstoqueUncheckedUpdateManyWithoutProdutoInput>
+  }
+
+  export type EstoqueScalarWhereInput = {
+    AND?: EstoqueScalarWhereInput | EstoqueScalarWhereInput[]
+    OR?: EstoqueScalarWhereInput[]
+    NOT?: EstoqueScalarWhereInput | EstoqueScalarWhereInput[]
+    id?: IntFilter<"Estoque"> | number
+    quantidade?: IntFilter<"Estoque"> | number
+    createdAt?: DateTimeFilter<"Estoque"> | Date | string
+    updatedAt?: DateTimeFilter<"Estoque"> | Date | string
+    produtoId?: IntFilter<"Estoque"> | number
+    vendaId?: IntNullableFilter<"Estoque"> | number | null
+  }
+
+  export type ProductCreateWithoutEstoquesInput = {
+    name: string
+    price: Decimal | DecimalJsLike | number | string
+    quantity: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductUncheckedCreateWithoutEstoquesInput = {
+    id?: number
+    name: string
+    price: Decimal | DecimalJsLike | number | string
+    quantity: number
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProductCreateOrConnectWithoutEstoquesInput = {
+    where: ProductWhereUniqueInput
+    create: XOR<ProductCreateWithoutEstoquesInput, ProductUncheckedCreateWithoutEstoquesInput>
+  }
+
+  export type VendaCreateWithoutEstoquesInput = {
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserCreateNestedManyWithoutVendaInput
+  }
+
+  export type VendaUncheckedCreateWithoutEstoquesInput = {
+    id?: number
+    description: string
+    status: $Enums.Status
+    valor: Decimal | DecimalJsLike | number | string
+    modalidade: $Enums.Modality
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    users?: UserUncheckedCreateNestedManyWithoutVendaInput
+  }
+
+  export type VendaCreateOrConnectWithoutEstoquesInput = {
+    where: VendaWhereUniqueInput
+    create: XOR<VendaCreateWithoutEstoquesInput, VendaUncheckedCreateWithoutEstoquesInput>
+  }
+
+  export type ProductUpsertWithoutEstoquesInput = {
+    update: XOR<ProductUpdateWithoutEstoquesInput, ProductUncheckedUpdateWithoutEstoquesInput>
+    create: XOR<ProductCreateWithoutEstoquesInput, ProductUncheckedCreateWithoutEstoquesInput>
+    where?: ProductWhereInput
+  }
+
+  export type ProductUpdateToOneWithWhereWithoutEstoquesInput = {
+    where?: ProductWhereInput
+    data: XOR<ProductUpdateWithoutEstoquesInput, ProductUncheckedUpdateWithoutEstoquesInput>
+  }
+
+  export type ProductUpdateWithoutEstoquesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProductUncheckedUpdateWithoutEstoquesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    quantity?: IntFieldUpdateOperationsInput | number
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type VendaUpsertWithoutEstoquesInput = {
+    update: XOR<VendaUpdateWithoutEstoquesInput, VendaUncheckedUpdateWithoutEstoquesInput>
+    create: XOR<VendaCreateWithoutEstoquesInput, VendaUncheckedCreateWithoutEstoquesInput>
+    where?: VendaWhereInput
+  }
+
+  export type VendaUpdateToOneWithWhereWithoutEstoquesInput = {
+    where?: VendaWhereInput
+    data: XOR<VendaUpdateWithoutEstoquesInput, VendaUncheckedUpdateWithoutEstoquesInput>
+  }
+
+  export type VendaUpdateWithoutEstoquesInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUpdateManyWithoutVendaNestedInput
+  }
+
+  export type VendaUncheckedUpdateWithoutEstoquesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    users?: UserUncheckedUpdateManyWithoutVendaNestedInput
+  }
+
+  export type EstoqueCreateWithoutVendaInput = {
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produto: ProductCreateNestedOneWithoutEstoquesInput
+  }
+
+  export type EstoqueUncheckedCreateWithoutVendaInput = {
+    id?: number
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produtoId: number
+  }
+
+  export type EstoqueCreateOrConnectWithoutVendaInput = {
+    where: EstoqueWhereUniqueInput
+    create: XOR<EstoqueCreateWithoutVendaInput, EstoqueUncheckedCreateWithoutVendaInput>
+  }
+
+  export type EstoqueCreateManyVendaInputEnvelope = {
+    data: EstoqueCreateManyVendaInput | EstoqueCreateManyVendaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserCreateWithoutVendaInput = {
+    email: string
+    password: string
+    name: string
+    img?: string | null
+    role: $Enums.Role
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserUncheckedCreateWithoutVendaInput = {
+    id?: number
+    email: string
+    password: string
+    name: string
+    img?: string | null
+    role: $Enums.Role
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserCreateOrConnectWithoutVendaInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutVendaInput, UserUncheckedCreateWithoutVendaInput>
+  }
+
+  export type EstoqueUpsertWithWhereUniqueWithoutVendaInput = {
+    where: EstoqueWhereUniqueInput
+    update: XOR<EstoqueUpdateWithoutVendaInput, EstoqueUncheckedUpdateWithoutVendaInput>
+    create: XOR<EstoqueCreateWithoutVendaInput, EstoqueUncheckedCreateWithoutVendaInput>
+  }
+
+  export type EstoqueUpdateWithWhereUniqueWithoutVendaInput = {
+    where: EstoqueWhereUniqueInput
+    data: XOR<EstoqueUpdateWithoutVendaInput, EstoqueUncheckedUpdateWithoutVendaInput>
+  }
+
+  export type EstoqueUpdateManyWithWhereWithoutVendaInput = {
+    where: EstoqueScalarWhereInput
+    data: XOR<EstoqueUpdateManyMutationInput, EstoqueUncheckedUpdateManyWithoutVendaInput>
+  }
+
+  export type UserUpsertWithWhereUniqueWithoutVendaInput = {
+    where: UserWhereUniqueInput
+    update: XOR<UserUpdateWithoutVendaInput, UserUncheckedUpdateWithoutVendaInput>
+    create: XOR<UserCreateWithoutVendaInput, UserUncheckedCreateWithoutVendaInput>
+  }
+
+  export type UserUpdateWithWhereUniqueWithoutVendaInput = {
+    where: UserWhereUniqueInput
+    data: XOR<UserUpdateWithoutVendaInput, UserUncheckedUpdateWithoutVendaInput>
+  }
+
+  export type UserUpdateManyWithWhereWithoutVendaInput = {
+    where: UserScalarWhereInput
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyWithoutVendaInput>
+  }
+
+  export type UserScalarWhereInput = {
+    AND?: UserScalarWhereInput | UserScalarWhereInput[]
+    OR?: UserScalarWhereInput[]
+    NOT?: UserScalarWhereInput | UserScalarWhereInput[]
+    id?: IntFilter<"User"> | number
+    email?: StringFilter<"User"> | string
+    password?: StringFilter<"User"> | string
+    name?: StringFilter<"User"> | string
+    img?: StringNullableFilter<"User"> | string | null
+    role?: EnumRoleFilter<"User"> | $Enums.Role
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
+  }
+
+  export type VendaUpdateWithoutUsersInput = {
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    estoques?: EstoqueUpdateManyWithoutVendaNestedInput
+  }
+
+  export type VendaUncheckedUpdateWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    estoques?: EstoqueUncheckedUpdateManyWithoutVendaNestedInput
+  }
+
+  export type VendaUncheckedUpdateManyWithoutUsersInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    description?: StringFieldUpdateOperationsInput | string
+    status?: EnumStatusFieldUpdateOperationsInput | $Enums.Status
+    valor?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    modalidade?: EnumModalityFieldUpdateOperationsInput | $Enums.Modality
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EstoqueCreateManyProdutoInput = {
+    id?: number
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    vendaId?: number | null
+  }
+
+  export type EstoqueUpdateWithoutProdutoInput = {
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    venda?: VendaUpdateOneWithoutEstoquesNestedInput
+  }
+
+  export type EstoqueUncheckedUpdateWithoutProdutoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vendaId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type EstoqueUncheckedUpdateManyWithoutProdutoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    vendaId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type EstoqueCreateManyVendaInput = {
+    id?: number
+    quantidade: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    produtoId: number
+  }
+
+  export type EstoqueUpdateWithoutVendaInput = {
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produto?: ProductUpdateOneRequiredWithoutEstoquesNestedInput
+  }
+
+  export type EstoqueUncheckedUpdateWithoutVendaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type EstoqueUncheckedUpdateManyWithoutVendaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    quantidade?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    produtoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UserUpdateWithoutVendaInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    img?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutVendaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    img?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateManyWithoutVendaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    img?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

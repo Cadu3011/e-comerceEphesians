@@ -14,10 +14,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role{
+enum Role {
   ADMIN
   CLIENTE
 }
+
+enum Status {
+  PENDENTE
+  CONFIRMED
+  CANCELED
+}
+enum Modality {
+  DINHEIRO
+  DEBITO
+  CREDITO
+  PARCELADO
+  PIX
+} 
 model User {
   id Int @default(autoincrement()) @id
   email String @unique
@@ -25,6 +38,42 @@ model User {
   name String
   img String?
   role Role
+  Venda Venda[] @relation("userVenda")
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Product {
+  id             Int               @id @default(autoincrement())
+  name           String
+  price          Decimal           @db.Decimal(9,2)
+  quantity       Int  
+  isActive Boolean @default(true)
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  estoques       Estoque[]    @relation("ProdutoEstoque")       
+}
+
+model Estoque {
+  id             Int               @id @default(autoincrement())
+  quantidade     Int
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @updatedAt
+  produtoId      Int   
+  vendaId Int?            
+  produto        Product            @relation("ProdutoEstoque", fields: [produtoId], references: [id])
+  venda  Venda?     @relation("vendaStock", fields: [vendaId], references: [id])
+}
+model Venda {
+  id            Int               @id @default(autoincrement())
+  description   String
+  status        Status
+  valor Decimal @db.Decimal(9,2)
+  estoques       Estoque[]    @relation("vendaStock")
+  users    User[] @relation("userVenda")
+  modalidade Modality
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+
+}
+
