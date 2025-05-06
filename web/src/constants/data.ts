@@ -15,3 +15,20 @@ export const productData = [
     },
     
   ];
+  export const addProduct = async(formData: FormData)=>{
+    const name = formData.get("descProduct") as string
+    const price = formData.get("price") as string
+    const quantity = formData.get("quantidade") as string
+    const data = {
+        name,
+        price,
+        quantity
+    }
+    fetch("http://localhost:4000/product",{
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+    })
+  }

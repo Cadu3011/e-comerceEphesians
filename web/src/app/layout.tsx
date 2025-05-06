@@ -21,7 +21,6 @@ export default function RootLayout({
       <body className="font-bodyFont bg-main-bg w-full text-darkText">
         
         <AuthProvider>
-        <Header />
         {children}
         </AuthProvider>
         <Footer/>

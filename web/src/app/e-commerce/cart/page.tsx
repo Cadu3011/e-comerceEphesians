@@ -2,7 +2,7 @@
 
 import Container from "@/app/components/Container";
 import { useDispatch, useSelector } from "react-redux";
-import { StateProps } from "../../../types";
+import { StateProps } from "../../../../types";
 import CartItem from "@/app/components/CartItem";
 import { resetCart } from "@/redux/shoppingSlice";
 import PaymentForm from "@/app/components/PaymentForm";
@@ -35,7 +35,7 @@ const CartPage = () => {
           <p className="border-[1px] border-orange-600 w-full p-2 text-center">
             Your product cart is currently empty
           </p>
-          <Link href={"/"}>
+          <Link href={"/e-commerce"}>
             <button className="bg-darkText text-white py-2 px-6 rounded-md hover:bg-orange-600 duration-200">
               Return to Shop
             </button>

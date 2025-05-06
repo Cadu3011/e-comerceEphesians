@@ -67,7 +67,7 @@ const Header = () => {
           </div>
         )}
         {/* Cart button */}
-        <Link href={"/cart"}>
+        <Link href={"/e-commerce/cart"}>
           <div className="bg-black hover:bg-slate-950 rounded-full text-slate-100 hover:text-white flex items-center justify-center gap-x-1 px-3 py-1.5 border-[1px] border-black hover:border-orange-600 duration-200 relative">
             <IoMdCart className="text-xl" />
             <p className="text-sm font-semibold">
@@ -91,7 +91,7 @@ const Header = () => {
         {/* Order button */}
         {orderData?.order?.length > 0 && session && (
           <Link
-            href={"/order"}
+            href={"/e-commerce/order"}
             className="headerDiv px-2 gap-x-1 cursor-pointer"
           >
             <BsBookmarks className="text-2xl" />
