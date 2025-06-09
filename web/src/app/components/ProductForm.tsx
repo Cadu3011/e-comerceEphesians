@@ -8,6 +8,7 @@ export default function FormProduct(){
   const [descProduct,setDescProduct] = useState("")
   const [price, setPrice] = useState("")
   const [quantidade, setQuantidade] = useState("")
+  
   const handleSubmit = async (e:React.FormEvent)=>{
     e.preventDefault();
     const formData = new FormData()
@@ -24,7 +25,7 @@ export default function FormProduct(){
     return (
         <div>
           <div className="flex justify-center">
-            <form className="bg-slate-600 flex flex-col items-center justify-center h-full w-1/3 gap-4 p-4 rounded m-10" method="POST" onSubmit={handleSubmit}>
+            <form className="bg-slate-600 flex flex-col items-center justify-center h-full w-2/3 gap-4 p-4 rounded  " method="POST" onSubmit={handleSubmit}>
                 <div className="flex flex-col">
                 <label className="text-white mb-1">Descrição do Produto</label>
                 <InputComp type="text" value={descProduct} setValue={setDescProduct} placeholder=""/>

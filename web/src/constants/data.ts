@@ -32,3 +32,9 @@ export const productData = [
           body: JSON.stringify(data),
     })
   }
+  export const searchProduct =async (searchData:FormData)=>{
+    const search = searchData.get("search") as string
+    const res = await fetch(`http://localhost:4000/product/nome/${search}`)
+    const data = await res.json()
+    return data
+  }

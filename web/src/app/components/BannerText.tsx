@@ -33,7 +33,7 @@ const BannerText = ({ title }: Props) => {
           transition={{ duration: 0.7 }}
           className="flex gap-x-4 mt-2"
         >
-         <Link href={"/"}>
+         <Link href={"/e-commerce"}>
          <button className="py-3 px-6 rounded-full bg-slate-200 hover:bg-white duration-200 text-sm uppercase font-semibold">
             Find out more
           </button>
