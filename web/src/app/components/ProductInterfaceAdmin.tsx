@@ -24,21 +24,21 @@ export default function ProductInterfaceAdmin(){
         setProductList(result)
     }
     return(
-        <div className="h-96 flex justify-center items-center mt-4 ">
+        <div className="h-96 flex justify-center  items-center mt-4 ">
            {showForm && (
                 <div className="absolute mt-4 z-10 inset-0  bg-opacity-90 flex justify-center items-start ">
-                    <div className="relative bg-slate-600 rounded-md border border-black w-1/3">
+                    <div className="relative bg-slate-600   rounded-md border border-black w-1/3">
                     <button
                         onClick={() => setShowForm(false)}
                         className="absolute top-2 right-2 bg-red-500 text-white px-3 py-1 rounded"
                     >
                         Fechar
                     </button>
-                    <FormProduct />
+                    <FormProduct id=""/>
                     </div>
                 </div>
             )}
-            <div className="w-1/3 h-full bg-slate-600 rounded-md p-5  absolut z-0 inset-0">
+            <div className="w-1/3 h-full bg-slate-600 rounded-md p-5 max-h-[90vh] overflow-y-auto absolut z-0 inset-0">
                 <div className="flex justify-end ">
                     <div className="w-full max-w-sm min-w-[200px]">
                         <form onSubmit={handleSearch} className="relative">

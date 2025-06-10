@@ -72,6 +72,12 @@ export class ProductService {
       throw new Error('Produto não encontrado');
     }
 
-    return this.prisma.product.update({data,where})
+    return this.prisma.product.update({
+      data:{
+        name:data.name,
+        price:data.price,
+        quantity:Number(data.quantity)
+    },
+    where})
   }
 }
